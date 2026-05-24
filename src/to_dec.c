@@ -8,7 +8,7 @@ int main() {
     ans = 0;
     while (bin != 0) {
 		digit = bin % 10;
-        ans += (digit * pw);	
+		ans += (digit * pw);
 		bin /= 10;
 		pw <<= 1;
     }

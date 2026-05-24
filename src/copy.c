@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     char buf[count];
     int in, out;
     if (argc < 3) {
-        printf("Too few arguments\n");
+		printf("Too few arguments\n");
 		return 0;
     }
     in = open(argv[1], O_RDONLY);

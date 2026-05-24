@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 void handler(int n) {
-    printf("ok\n");
+	printf("ok\n");
 }
 
 int main(int argc, char* argv[]) {
@@ -15,13 +15,13 @@ int main(int argc, char* argv[]) {
     pid_t fr = fork();
     system(argv[0]);
     if (fr != 0) {
-        while (true) {
-	    	printf("%d\n", i);
-	    	i++;
-	    	i %= 10;
-	    	sleep(1);
-        }
-    }
+		while (true) {
+			printf("%d\n", i);
+			i++;
+			i %= 10;
+			sleep(1);
+		}
+	}
     else exit();
     return 0;
 }

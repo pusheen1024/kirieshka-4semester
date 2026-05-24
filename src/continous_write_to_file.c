@@ -4,14 +4,14 @@
 #include <signal.h>
 
 void handler(int n) {
-    printf("ok\n");
+	printf("ok\n");
 }
 
 int main() {
     int i = 0;
     signal(SIGHUP, handler);
     while (true) {
-    	freopen("myfile.txt", "a", stdout);
+		freopen("myfile.txt", "a", stdout);
 		printf("%d\n", i);
 		i++;
 		i %= 10;

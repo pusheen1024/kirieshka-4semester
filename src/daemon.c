@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     daemon(0, 0);
     while (true) {
 		sleep(1);
-        fprintf(in, "%d\n", i);
+		fprintf(in, "%d\n", i);
 		fflush(in);
 		i = (i + 1) % 10;
     }

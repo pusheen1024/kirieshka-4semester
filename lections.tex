@@ -1,0 +1,122 @@
+\subsection{Введение}
+
+Компьютеры делятся на цифровые вычислительные машины (ЦВМ) и аналоговые вычислительные машины (АВМ). Планировщик распределяет время между процессами с помощью карусели/приоритетов, т.е. применяются квазипараллельные вычисления (в каждый момент времени процессор занят одной задачей, но эти задачи постоянно меняются).
+
+Операционные системы делятся на универсальные ОС и ОС реального времени. Существуют однопользовательские и многопользовательские ОС. 
+
+Сервис "--- подпроцесс, работающий самостоятельно и изолированный от других.
+
+\subsection{История Unix}
+
+Multics. Первая ОС, написанная на языке высокого уровня (\textbf{C}) "--- Unix. А. Танненбаум "--- Minix. Линус Торвальдс "--- Linux (монолитное ядро, в результате спора с Танненбаумом Linux остался обозначением для ядра, а не для полноценной ОС). FreeBSD. QNX (Quick Unix) "--- ОС реального времени с микроядерной архитектурой.
+
+Linux "--- это только ядро, мы же пользуемся \textit{дистрибутивами} Linux. Дистрибутив включает в себя ядро, пакетный менеджер и набор прикладных программ.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{images/linux_distributions.jpg}
+	\centering
+	\caption{Схема дистрибутивов Linux и FreeBSD}
+\end{figure}
+
+LFS "--- Linux From Scratch, возможность создать собственный дистрибутив.
+
+LSB "--- Linux Standard Base.
+
+SUS "--- Single Unix Specification.
+
+\subsection{Компьютерные сети}
+
+Коммутация каналов/коммутация пакетов.
+
+Протокол "--- соглашение по передаче"=обработке данных.
+
+RFC "--- requests for comments.
+
+\begin{figure}[H]
+	\includegraphics[scale=0.4]{images/protocols.jpg}
+	\centering
+	\caption{Стек протоколов}
+\end{figure}
+
+\subsection{Уровни операционной системы}
+
+\begin{enumerate}
+	\item Kernel "--- ядро, внутренний уровень;
+	\item Shell "--- оболочка, внешний уровень.
+\end{enumerate}
+
+X Window System "--- графическая оболочка.
+
+XLog "--- окно входа X Server.
+
+\subsection{Системные вызовы}
+
+Аналог команды cp с помощью высокоуровневых функций работы с файлами:
+
+\begin{minted}{c}
+FILE* fv = fopen("from.txt", "r");
+FILE* tv = fopen("to.txt", "w");
+while ((c = getc(fv)) != EOF) putc(c, tv);
+fclose(fv);
+fclose(tv);
+\end{minted}
+
+Системные вызовы для работы с файлами:
+
+\begin{itemize}
+\item Создание файла:
+\begin{minted}{c}
+creat("file.txt", 0642);
+\end{minted}
+
+\item Сброс прав по умолчанию:
+\begin{minted}{c}
+umask(0);
+\end{minted}
+
+\item Создание файла и запись в него:
+\begin{minted}{c}
+char buf[10];
+umask(0);
+int fd = creat("file.txt", 0642);
+write(fd, buf, sizeof(buf));
+close(fd);
+\end{minted}
+
+\item Открытие файла (старый способ):
+\begin{minted}{c}
+int mode = 1; // 0 - r, 1 - w, 2 - rw
+open("file.txt", mode);
+\end{minted}
+
+\item Открытие файла (новый способ):
+
+Применяются флаги, их можно комбинировать через побитовое или (|).
+\begin{enumerate}
+	\item O\_CREAT "--- создать;
+	\item O\_RDONLY "--- открыть только для чтения;
+	\item O\_WRONLY "--- открыть только на запись;
+	\item O\_RDWR "--- открыть на чтение и запись;
+	\item O\_APPEND "--- запись в конец файла;
+	\item O\_NDELAY "--- не блокировать при открытии;
+	\item O\_TRUNC "--- сократить размер файла до нуля.
+\end{enumerate}
+
+\begin{minted}{c}
+int fd = open("from.txt", O_RDONLY);
+int to = open("to.txt", O_WRONLY | O_CREAT);
+char buf[10];
+while ((n = read(fd, buf, sizeof(buf))) > 0) {
+	write(to, buf, n);
+}
+\end{minted}
+
+\item Перенос указателя:
+
+Сдвинуть указатель файлового дескриптора \textit{fd} на 3 байта вправо с начала:
+\begin{minted}{c}
+lseek(fd, 3, 0);
+\end{minted}
+\end{itemize}
+
+Стандартные потоки: $0$ "--- stdin, $1$ "--- stdout, $2$ "--- stderr.

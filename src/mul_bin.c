@@ -3,12 +3,11 @@
 
 int to_dec(int bin) {
     int pw, ans, digit;
-
     pw = 1;
     ans = 0;
     while (bin != 0) {
 		digit = bin % 10;
-        ans += (digit * pw);	
+		ans += (digit * pw);
 		bin /= 10;
 		pw <<= 1;
     }
@@ -21,7 +20,7 @@ int add(int bin1, int bin2) {
     carry = 0;
     ans = 0;
     while (bin1 != 0 && bin2 != 0) {
-        d1 = bin1 % 10;
+		d1 = bin1 % 10;
 		d2 = bin2 % 10;
 		d = (d1 + d2 + carry) % 2;
 		carry = (d1 + d2 + carry) / 2;
@@ -32,7 +31,7 @@ int add(int bin1, int bin2) {
     }
     if (bin1 == 0) bin1 = bin2;
     while (bin1 != 0) {
-        d1 = bin1 % 10;
+		d1 = bin1 % 10;
 		d = (d1 + carry) % 2;
 		carry = (d1 + carry) / 2;
 		ans += (d * pw);
@@ -52,15 +51,15 @@ int mul(int bin1, int bin2) {
     ans = 0;
     pw1 = 1;
     while (bin1 != 0) {
-        d1 = bin1 % 10;
+		d1 = bin1 % 10;
 		tmp = bin2;
 		cur = 0;
 		pw = 1;
 		while (tmp != 0) {
-	    	d2 = tmp % 10;
-	   		cur += (d1 * d2 * pw);
-	   		tmp /= 10;
-	   		pw *= 10;
+			d2 = tmp % 10;
+			cur += (d1 * d2 * pw);
+			tmp /= 10;
+			pw *= 10;
 		}
 		bin1 /= 10;
 		ans = add(ans, cur * pw1);
