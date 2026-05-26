@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
-
+#include <sys/types.h>
 void handler(int n) {
 	printf("ok\n");
 }
@@ -22,6 +22,6 @@ int main(int argc, char* argv[]) {
 			sleep(1);
 		}
 	}
-    else exit();
+    else exit(0);
     return 0;
 }
