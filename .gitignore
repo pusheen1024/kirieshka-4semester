@@ -6,3 +6,4 @@ _minted
 *.log
 *.toc
 *.swp
+*.out
